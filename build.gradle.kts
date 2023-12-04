@@ -29,6 +29,7 @@ dependencies {
 
 application {
     mainClass.set("h08.Main")
+    applicationDefaultJvmArgs += "-ea"
 }
 
 tasks {
