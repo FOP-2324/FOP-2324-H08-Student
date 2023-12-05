@@ -144,7 +144,7 @@ public class Bank {
      * @return the capacity of the transaction history
      */
     public int transactionCapacity() {
-        return DEFAULT_TRANSACTION_CAPACITY;
+        return transactionHistoryCapacity;
     }
 
     /**
@@ -215,8 +215,8 @@ public class Bank {
      * @throws NoSuchElementException if the account with the specified IBAN does not exist
      */
     public int getAccountIndex(long iban) {
-        for (int i = 0; i < accounts.length; i++) {
-            if (accounts[i] != null && accounts[i].getIban() == iban)
+        for (int i = 0; i < size; i++) {
+            if (accounts[i].getIban() == iban)
                 return i;
         }
         throw new NoSuchElementException(String.valueOf(iban));
@@ -243,7 +243,7 @@ public class Bank {
      */
     private int getBankIndex(int bic) {
         for (int i = 0; i < transferableBanks.length; i++) {
-            if (transferableBanks[i] != null && transferableBanks[i].getBic() == bic)
+            if (transferableBanks[i].getBic() == bic)
                 return i;
         }
         throw new NoSuchElementException(String.valueOf(bic));
@@ -272,7 +272,7 @@ public class Bank {
         }
         int index = getBankIndex(bic);
         Bank removedBank = transferableBanks[index];
-        transferableBanks[index] = null;
+        System.arraycopy(transferableBanks, index, transferableBanks, index, transferableBanks.length - 1);
         return removedBank;
     }
 
