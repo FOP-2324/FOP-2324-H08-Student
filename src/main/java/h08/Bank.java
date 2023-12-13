@@ -227,7 +227,6 @@ public class Bank {
      *
      * @param iban the IBAN of the account to remove
      * @return the removed account
-     * @throws IllegalArgumentException if the IBAN is negative
      * @throws NoSuchElementException   if the account with the specified IBAN does not exist
      */
     public Account remove(long iban) {
@@ -267,9 +266,7 @@ public class Bank {
      * @return the removed bank
      */
     public Bank remove(int bic) {
-        if (bic < 0) {
-            throw new IllegalArgumentException("BIC cannot be negative!");
-        }
+        assert bic >= 0;
         int index = getBankIndex(bic);
         Bank removedBank = transferableBanks[index];
         System.arraycopy(transferableBanks, index, transferableBanks, index, transferableBanks.length - 1);

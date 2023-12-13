@@ -54,7 +54,7 @@ public class TransactionHistory {
     TransactionHistory(TransactionHistory history, int capacity) {
         this.capacity = capacity;
         this.transactions = new Transaction[capacity];
-        System.arraycopy(history.transactions, 0, this.transactions, 0, Math.min(size, history.size));
+        System.arraycopy(history.transactions, 0, this.transactions, 0, Math.min(capacity, history.size));
     }
 
     /**
@@ -92,7 +92,8 @@ public class TransactionHistory {
      * @throws NoSuchElementException if the transaction does not exist in this history.
      */
     public Transaction get(long transactionNumber) {
-        for (Transaction transaction : transactions) {
+        for (int i = 0; i < size; i++) {
+            Transaction transaction = transactions[i];
             if (transaction.transactionNumber() == transactionNumber) {
                 return transaction;
             }
@@ -108,10 +109,11 @@ public class TransactionHistory {
      * @throws IndexOutOfBoundsException if the index is out of bounds
      */
     public Transaction get(int index) {
-        if (index < 0 || index >= nextIndex) {
-            throw new IndexOutOfBoundsException("Index must be between 0 and " + nextIndex);
+            Transaction transaction = transactions[index];
+        if (transaction == null) {
+            throw new IndexOutOfBoundsException(index);
         }
-        return transactions[index];
+        return transaction;
     }
 
     /**
