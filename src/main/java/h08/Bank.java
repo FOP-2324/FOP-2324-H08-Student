@@ -227,7 +227,12 @@ public class Bank {
      *
      * @param iban the IBAN of the account to remove
      * @return the removed account
+<<<<<<< Updated upstream
      * @throws NoSuchElementException   if the account with the specified IBAN does not exist
+=======
+     * @throws IllegalArgumentException if the IBAN is negative
+     * @throws NoSuchElementException if the account with the specified IBAN does not exist
+>>>>>>> Stashed changes
      */
     public Account remove(long iban) {
         return crash(); // TODO: H2.3 - remove if implemented
@@ -269,7 +274,10 @@ public class Bank {
         assert bic >= 0;
         int index = getBankIndex(bic);
         Bank removedBank = transferableBanks[index];
-        System.arraycopy(transferableBanks, index, transferableBanks, index, transferableBanks.length - 1);
+        Bank[] newTransferableBanks = new Bank[transferableBanks.length - 1];
+        System.arraycopy(transferableBanks, 0, newTransferableBanks, 0, index);
+        System.arraycopy(transferableBanks, index + 1, newTransferableBanks, index, transferableBanks.length - index - 1);
+        transferableBanks = newTransferableBanks;
         return removedBank;
     }
 
