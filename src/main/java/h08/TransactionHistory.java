@@ -78,7 +78,7 @@ public class TransactionHistory {
      * Updates the specified transaction in this history.
      *
      * @param transaction the transaction to update
-     * @throws NoSuchElementException if the transaction does not exist in this history.
+     * @throws TransactionException if the transaction does not exist in this history.
      */
     public void update(Transaction transaction) {
         crash(); // TODO: H5.2 - remove if implemented
