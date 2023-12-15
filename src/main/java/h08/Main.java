@@ -4,6 +4,12 @@ package h08;
  * Main entry point in executing the program.
  */
 public class Main {
+
+    /**
+     * Epsilon for comparing double values.
+     */
+    private static final double EPSILON = 0.0001;
+
     /**
      * Main entry point in executing the program.
      *
