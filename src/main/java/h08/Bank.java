@@ -227,12 +227,7 @@ public class Bank {
      *
      * @param iban the IBAN of the account to remove
      * @return the removed account
-<<<<<<< Updated upstream
-     * @throws NoSuchElementException   if the account with the specified IBAN does not exist
-=======
-     * @throws IllegalArgumentException if the IBAN is negative
      * @throws NoSuchElementException if the account with the specified IBAN does not exist
->>>>>>> Stashed changes
      */
     public Account remove(long iban) {
         return crash(); // TODO: H2.3 - remove if implemented
