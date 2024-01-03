@@ -139,11 +139,11 @@ public class TransactionHistory {
      *
      * @return the latest transaction in this history
      */
-    public Transaction getLatestTransaction() {
+   public Transaction getLatestTransaction() {
         if (nextIndex == 0 && size != capacity) {
             throw new IllegalStateException("No transactions yet!");
         }
-        return transactions[nextIndex - 1];
+        return transactions[Math.floorMod(nextIndex - 1, capacity)];
     }
 
     /**
