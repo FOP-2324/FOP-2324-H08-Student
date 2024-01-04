@@ -152,9 +152,10 @@ public class TransactionHistory {
      * @return the available transactions in this history
      */
     public Transaction[] getTransactions() {
-        Transaction[] availableTransactions = new Transaction[size];
+       Transaction[] availableTransactions = new Transaction[size];
         for (int i = availableTransactions.length - 1; i >= 0; i--) {
-            availableTransactions[i] = transactions[Math.floorMod(nextIndex - i - 1, capacity)];
+            availableTransactions[availableTransactions.length - 1 - i] =
+                transactions[Math.floorMod(nextIndex - i - 1, capacity)];
         }
         return availableTransactions;
     }
